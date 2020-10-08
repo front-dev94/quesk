@@ -1,0 +1,71 @@
+@import "variables";
+
+.h1, .h2, .h3, .h4, .h5 {
+  margin: 0;
+}
+
+.h1 {
+  font-size: 40px;
+  letter-spacing: -0.5px;
+}
+
+.h2 {
+  font-size: 32px;
+  letter-spacing: -0.4px;
+}
+
+.h3 {
+  font-size: 24px;
+  letter-spacing: -0.3px;
+}
+
+.h4 {
+  font-size: 18px;
+  letter-spacing: -0.23px;
+}
+
+.h5 {
+  font-size: 14px;
+  letter-spacing: 0.23px;
+}
+
+.h6 {
+  font-size: 12px;
+  letter-spacing: 0.23px;
+}
+
+.text-dark-grey {
+  color: $dark-gray;
+}
+
+.text-primary {
+  color: $primary-color;
+}
+
+.fw {
+  font-weight: normal;
+}
+
+.fw-200 {
+  font-weight: 200;
+}
+
+.fw-300 {
+  font-weight: 300;
+}
+
+.fw-400 {
+  font-weight: 400;
+}
+
+.fw-500 {
+  font-weight: 500;
+}
+
+.fw-600 {
+  font-weight: 600;
+}
+
+.fs-13 {
+  font-size: 13px;
+}

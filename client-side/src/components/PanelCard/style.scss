@@ -1,0 +1,27 @@
+@import "assets/stylesheets/variables.scss";
+
+.panel-card {
+  margin-bottom: 32px;
+
+  .card {
+    border-radius: 3px;
+    border-color: $card-border;
+    height: 100%;
+  }
+
+  .card-body {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .card-title {
+    color: $text-dark;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.23px;
+    line-height: 1.38;
+    margin-bottom: 24px;
+  }
+}

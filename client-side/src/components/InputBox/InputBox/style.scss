@@ -1,0 +1,143 @@
+$error-color: #eb4b4b;
+$placeholder-color: #7b7e81;
+
+.input-form-group {
+  position: relative;
+  margin-bottom: 24px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  label {
+    color: #393b3e;
+    font-size: 14px;
+    line-height: 1.36;
+    margin-bottom: 12px;
+  }
+}
+
+
+.form-control[readonly] {
+  background-color: #FFFFFF !important;
+}
+
+input.form-control {
+  height: 48px;
+  color: #393b3e;
+  border: 1px solid #dddfe2;
+  border-radius: 3px;
+  background-color: #FFFFFF;
+  padding: 12px 16px;
+  font-size: 14px;
+  line-height: 1.43;
+
+  &-sm {
+    height: 32px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+  }
+
+  &:hover {
+    border-color: #dddfe2;
+  }
+
+  &:focus {
+    border-color: #85888b;
+  }
+
+  &.is-invalid {
+    border-color: $error-color;
+    background: none;
+  }
+
+  &:focus {
+    box-shadow: none;
+  }
+}
+
+.invalid-feedback {
+  color: $error-color;
+  font-size: 13px;
+  letter-spacing: -0.15px;
+  line-height: 1.54;
+  margin-top: 4px;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: $placeholder-color;
+  opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder, ::-ms-input-placeholder { /* Internet Explorer 10-11 , Microsoft Edge */
+  color: $placeholder-color;
+}
+
+
+input[type=search].form-control {
+  padding-right: calc(1.5em + 0.75rem);
+  background-image: url("../../../assets/images/search.svg");
+  background-repeat: no-repeat;
+  background-position: center left 18px;
+  background-size: 14px 14px;
+  padding-left: 44px;
+
+  &:focus {
+    border-color: #85888b;
+    background-image: url("../../../assets/images/search-black.svg");
+  }
+}
+
+.custom-control-input:checked ~ .custom-control-label::before {
+  background-color: #4083cc !important;
+  border-color: #4083cc !important;
+}
+
+.form-check-label {
+  display: flex;
+  align-items: center;
+
+  .custom-control-inline {
+    margin-right: 16px;
+    padding-left: 20px;
+  }
+
+  .custom-checkbox {
+    .custom-control-label {
+      &::before, &:after {
+        width: 20px;
+        height: 20px;
+        top: 0;
+        left: -24px;
+      }
+
+      &::before {
+        border-color: #dddfe2;
+      }
+
+      &:hover {
+        &::before {
+          border-color: #c1c3c7;
+        }
+      }
+    }
+  }
+}
+
+.feedback-icon {
+  position: absolute;
+  top: 49px;
+  right: 17px;
+  line-height: 0;
+
+  svg path {
+    fill: #D0D3D6;
+  }
+
+  .btn {
+    height: auto;
+    padding: 0;
+    border: 0;
+    line-height: 0;
+  }
+}

@@ -1,0 +1,19 @@
+@import "assets/stylesheets/variables.scss";
+
+.page-content {
+  position: relative;
+
+  margin-top: 40px;
+  padding: 0px 15px;
+
+  border: none;
+
+  .page-title {
+    color: $text-dark;
+    font-size: 24px;
+    line-height: 1.33;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #ecf0f1;
+  }
+}

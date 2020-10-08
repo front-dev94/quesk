@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="7px" height="10px" viewBox="0 0 7 10" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 53.2 (72643) - https://sketchapp.com -->
+    <title>Arrow</title>
+    <desc>Created with Sketch.</desc>
+    <g id="🔄-Symbols-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Navigation/Pagination" transform="translate(-185.000000, -7.000000)">
+            <g id="Arrow" transform="translate(176.000000, 0.000000)">
+                <rect id="State" x="0" y="0" width="24" height="24" rx="3"></rect>
+                <g id="Icon/Accordion" transform="translate(2.000000, 2.000000)" fill="#393B3E" fill-rule="nonzero">
+                    <polygon id="Color" points="7.15833333 13.825 10.975 10 7.15833333 6.175 8.33333333 5 13.3333333 10 8.33333333 15"></polygon>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

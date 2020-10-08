@@ -1,0 +1,40 @@
+.basic-info-card {
+
+  .card-title{
+    margin-bottom: 0px;
+  }
+
+  .info-box{
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+
+  .name {
+    font-size: 22px;
+    line-height: 1.05;
+    color: #393b3e;
+  }
+
+  .email {
+    padding-top: 8px;
+    font-size: 16px;
+    line-height: 1.38;
+    color: #7b7e81;
+  }
+
+  .user-avatar{
+    position: relative;
+    display: block;
+    border-radius: 50%;
+    display: inline-block;
+    background: #ced4da no-repeat 50%/cover;
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    color: #868e96;
+    font-weight: 600;
+    font-size: 22px;
+    margin-bottom: 10px;
+    line-height: 60px;
+  }
+}
