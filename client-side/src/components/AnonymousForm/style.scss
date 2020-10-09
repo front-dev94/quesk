@@ -1,0 +1,49 @@
+@import "../../assets/stylesheets/variables.scss";
+
+.anonymous-form {
+  position: relative;
+  margin-top: 80px;
+
+  .container {
+    width: 100%;
+    max-width: 460px;
+    margin: auto;
+    padding: 0;
+  }
+
+  .title {
+    margin-bottom: 20px;
+    font-weight: 600;
+    font-size: 30px;
+  }
+
+  .card {
+    border-color: #eff1f4;
+  }
+
+  .card-body {
+    padding: 40px;
+  }
+
+  .card-title {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 32px;
+    margin-bottom: 14px;
+    text-align: center;
+  }
+
+  .card-description {
+    font-size: 13px;
+    line-height: 21px;
+    padding-bottom: 26px;
+  }
+
+  .form-footer {
+    margin-top: 32px;
+
+    .back-to-login {
+      margin-top: 32px;
+    }
+  }
+}
