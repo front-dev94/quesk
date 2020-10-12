@@ -1,11 +1,26 @@
 import React from 'react';
 import {Redirect, Route} from 'react-router-dom';
+
+// Components
 import Profile from './../screens/profile/Profile';
+import Dashboard from 'components/Dashboard';
+import { QuestionPage } from 'components/Question';
+
 
 // Constants
 export const ROUTES = [
     {
-        path: 'profile',
+        path: '/',
+        name: 'Dashboard',
+        component: Dashboard
+    },
+    {
+        path: '/questions/:id',
+        name: 'Question',
+        component: QuestionPage
+    },
+    {
+        path: '/profile',
         name: 'Profile',
         component: Profile
     }

@@ -3,11 +3,6 @@ import PanelCard from 'components/PanelCard';
 import ChangePasswordForm from "../ChangePasswordForm";
 import './style.scss';
 
-const FIRST_TIME_LOGIN_MODAL_DATA = {
-  title: "First time login",
-  message: "You are logged in for the first time and you have to change your password to start using the application",
-};
-
 const CHANGE_PASSWORD_MODAL_DATA = {
   title: "Change password",
   message: "Successfully changed password"

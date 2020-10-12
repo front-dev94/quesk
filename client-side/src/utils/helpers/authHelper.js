@@ -1,4 +1,4 @@
-const STORAGE_KEY = 'currrent_user';
+const STORAGE_KEY = 'current_user';
 
 class AuthHelper {
   static user = null;

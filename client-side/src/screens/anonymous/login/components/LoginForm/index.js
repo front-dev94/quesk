@@ -11,7 +11,7 @@ const LoginForm = ({onSubmit}) => {
       onSubmit={onSubmit}
       validationSchema={loginSchema}
       initialValues={{
-        username: '',
+        email: '',
         password: '',
         hasError: false
       }}
@@ -24,8 +24,8 @@ const LoginForm = ({onSubmit}) => {
               </div>
             }
             <InputBox
-              id="username"
-              name="username"
+              id="email"
+              name="email"
               type="text"
               label="Email"
               {...props}
@@ -38,13 +38,11 @@ const LoginForm = ({onSubmit}) => {
               wrapperClassName="m-0"
               {...props}
             />
-            <div className="forgot-your-password text-right">
-              {/* <Link to="/forgot-password">
-                Forgot password?
-              </Link> */}
-            </div>
             <div className="form-footer">
               <Button type="submit" color="primary" block>Submit</Button>
+              <div className="back-to-login text-center">
+                <Link to="/sign-up">Create an account</Link>
+              </div>
             </div>
           </Form>
         );

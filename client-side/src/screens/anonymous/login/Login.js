@@ -1,15 +1,17 @@
-import React from 'react';
-import {AuthService} from "services";
+import React, {Component} from 'react';
+import { AuthService } from 'services';
 import AnonymousForm from "components/AnonymousForm";
 import LoginForm from './components/LoginForm';
 import './style.scss';
 
-class Login extends React.Component {
+class Login extends Component {
   onSubmit = async (values, actions) => {
     const {hasError, ...credentials} = values;
+
     const user = await AuthService.login(credentials);
     actions.setFieldValue("hasError", false);
-    if (!user.errors) {
+
+    if (!user.error) {
       await this.props.setUser(user);
       this.props.history.push('/')
     } else {

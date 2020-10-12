@@ -1,0 +1,93 @@
+.question-page{
+    .panel-card{
+        .card-title{
+            margin-bottom: 0px;
+        }
+    }
+    
+    .question-header{
+        position: relative;
+        
+        display: flex;
+        display: -webkit-flex;
+    
+        align-items: center;
+        -webkit-align-items: center;
+
+        justify-content: space-between;
+        -webkit-justify-content: space-between;
+        margin-bottom: 20px;
+
+
+        .question-info { 
+            position: relative;
+        
+            display: flex;
+            display: -webkit-flex;
+        
+            align-items: center;
+            -webkit-align-items: center;
+        
+            .question-author-image{
+                position: relative;
+                width: 42px;
+                height: 42px;
+                border-radius: 50%;
+                display: inline-block;
+                background: #9b59b6 no-repeat 50%/cover;
+                text-align: center;
+                color: #fff;
+                font-weight: 600;
+                vertical-align: bottom;
+                font-size: .875rem;
+                margin-right: 20px;
+                line-height: 45px;
+            }
+        
+            .question-title{
+                h4{
+                    margin-bottom: 0;
+                    font-weight: 600;
+                }
+        
+                p{
+                    margin-bottom: 0px;
+                }
+            }
+        }
+    }
+
+    .question-reactions{
+        display: flex;
+        display: -webkit-flex;
+
+        .question-reaction{
+            position: relative;
+            margin-left: 10px;
+            
+            button{
+                border: none;
+                background: #ecf0f1;
+                outline: none;
+                border-radius: 50%;
+                height: 40px;
+                width: 40px;
+                margin-left: 10px;
+    
+                &.thumbs-down{
+                    &:hover{
+                        background-color:#e74c3c;
+                        color: #fff;
+                    }
+                }
+    
+                &.thumbs-up{
+                    &:hover{
+                        background-color:#3498db;
+                        color: #fff;
+                    }
+                }
+            }
+        }
+    }
+}

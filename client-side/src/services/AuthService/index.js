@@ -1,23 +1,18 @@
 import Http from 'utils/http';
+import {userInfoFormatter} from 'utils/helpers/userInfoFormatter';
 
 class AuthService {
-  static async signUp(input) {
-    
+  static async login(data) {
+    const response = await Http.post('/auth/login', data);
+
+    return userInfoFormatter(response);
   }
 
-  static async login(input) {
-    
-  }
+  static async signUp(data) {
+    const response = await Http.post('/auth/sign-up', data);
 
- 
-  static async forgotPassword(username) {
-    
+    return userInfoFormatter(response);
   }
-
-  static async resetPassword(input) {
-    
-  }
-
 }
 
 export default AuthService;

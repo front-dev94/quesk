@@ -5,7 +5,8 @@
 
   .card {
     border-radius: 3px;
-    border-color: $card-border;
+    border: none;
+    box-shadow: 0 1px 15px rgba(0,0,0,.04), 0 1px 6px rgba(0,0,0,.04);
     height: 100%;
   }
 

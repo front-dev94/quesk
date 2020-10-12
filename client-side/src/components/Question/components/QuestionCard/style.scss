@@ -1,0 +1,118 @@
+.question-item{
+    display: flex;
+    display: -webkit-flex;
+
+    padding: 1.75rem;
+    background: #fff;
+    box-shadow: 0 1px 15px rgba(0,0,0,.04), 0 1px 6px rgba(0,0,0,.04);
+    border-radius: 10px;
+
+    margin-bottom: 20px;
+
+    .question-rating{
+        display: flex;
+        display: -webkit-flex;
+
+        flex-direction: column;
+        -webkit-flex-direction: column;
+
+        align-items: center;
+        -webkit-align-items: center;
+
+        text-align: center;
+        margin-right: 20px;
+
+        .question-likes, .question-answers{
+            padding: 10px;
+            border-radius: 3px;
+            font-size: 14px;
+            width: 100%;
+        }
+        .question-answers{
+            background: #74b9ff;
+            margin-top: 10px;
+            color: #fff;
+        }
+        
+        span{
+            display: block;
+            font-weight: 600;
+            font-size: 20px;
+        }
+    }
+
+    .question-info{
+        .question-header{
+            position: relative;
+
+            display: flex;
+            display: -webkit-flex;
+
+            align-items: center;
+            -webkit-align-items: center;
+
+            margin-bottom: 20px;
+
+            .question-author-image{
+                position: relative;
+                width: 42px;
+                height: 42px;
+                border-radius: 50%;
+                display: inline-block;
+                background: #9b59b6 no-repeat 50%/cover;
+                text-align: center;
+                color: #fff;
+                font-weight: 600;
+                vertical-align: bottom;
+                font-size: .875rem;
+                margin-right: 10px;
+                line-height: 45px;
+            }
+
+            .question-title{
+                a{
+                    font-size: 1.5rem;
+                    margin-bottom: 0;
+                    font-weight: 600;
+
+                    &:hover{
+                        text-decoration: none;
+                    }
+                }
+
+                p{
+                    margin-bottom: 0px;
+                }
+            }
+        }
+
+        .tags{
+            display: flex;
+            display: -webkit-flex;
+
+            .tag{
+                display: flex;
+                display: -webkit-flex;
+
+                align-items: center;
+                -webkit-align-items: center;
+
+                justify-content: center;
+                -webkit-justify-content: center;
+
+                height: 22px;
+                border-radius: 10px;
+                font-size: 12px;
+                padding: 10px;
+                font-weight: 600;
+                min-width: 60px;
+                cursor: pointer;
+                margin-bottom: 5px;
+                text-align: center;
+                color: #6e7687;
+                background-color: #e9ecef;
+                margin-right: 10px;
+            }
+        }
+    }
+}

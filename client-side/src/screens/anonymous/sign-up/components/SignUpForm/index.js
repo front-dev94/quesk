@@ -1,20 +1,21 @@
 import React from 'react';
-import {Link} from "react-router-dom";
 import {Form, Formik} from "formik";
 import {Button} from "reactstrap";
-import InputBox from "components/InputBox";
-import resetPasswordSchema from "./resetPasswordSchema";
+import {Link} from "react-router-dom";
+import InputBox, {PasswordBox} from "components/InputBox";
+import signUpSchema from './signUpSchema';
 
-const LoginForm = ({onSubmit}) => {
+const SignUpForm = ({onSubmit}) => {
   return (
     <Formik
       onSubmit={onSubmit}
-      validationSchema={resetPasswordSchema}
+      validationSchema={signUpSchema}
       initialValues={{
         username: '',
-        confirmationCode: '',
+        firstName: '',
+        lastName: '',
+        email: '',
         password: '',
-        confirmPassword: '',
         hasError: undefined,
       }}
       render={props => {
@@ -24,31 +25,39 @@ const LoginForm = ({onSubmit}) => {
               <div className="text-danger fs-13 pb-3">{props.values.hasError}</div>
             }
             <InputBox
+              id="firstName"
+              name="firstName"
+              type="text"
+              label="First name"
+              {...props}
+            />
+            <InputBox
+              id="lastName"
+              name="lastName"
+              type="text"
+              label="Last name"
+              {...props}
+            />
+            <InputBox
               id="username"
               name="username"
+              type="text"
+              label="Username"
+              {...props}
+            />
+            <InputBox
+              id="email"
+              name="email"
               type="text"
               label="Email"
               {...props}
             />
-            <InputBox
-              id="confirmationCode"
-              name="confirmationCode"
-              type="text"
-              label="Confirmation code"
-              {...props}
-            />
-            <InputBox
+            <PasswordBox
               id="password"
               name="password"
               type="password"
-              label="New password"
-              {...props}
-            />
-            <InputBox
-              id="confirmPassword"
-              name="confirmPassword"
-              type="password"
-              label="Repeat password"
+              label="Password"
+              wrapperClassName="m-0"
               {...props}
             />
             <div className="form-footer">
@@ -65,4 +74,4 @@ const LoginForm = ({onSubmit}) => {
   ;
 };
 
-export default LoginForm;
+export default SignUpForm;

@@ -1,18 +1,26 @@
-import AuthHelper from "../helpers/authHelper";
+import AuthHelper from './../helpers/authHelper';
 
-const server = "";
+const server = "http://localhost:8080/api";
 const METHOD_GET = 'GET';
 const METHOD_POST = 'POST';
+const METHOD_PUT = 'PUT';
+const METHOD_DELETE = 'DELETE';
 
 class Http {
-  static token = AuthHelper.getAccessToken();
-
   static async get(url, params, headers) {
     return await Http.fetchWrapper(url, params, null, headers, METHOD_GET);
   }
 
   static async post(url, data, params, headers) {
     return await Http.fetchWrapper(url, params, data, headers, METHOD_POST);
+  }
+
+  static async put(url, data, params, headers) {
+    return await Http.fetchWrapper(url, params, data, headers, METHOD_PUT);
+  }
+
+  static async delete(url, data, params, headers) {
+    return await Http.fetchWrapper(url, params, data, headers, METHOD_DELETE);
   }
 
   static setToken(token) {
@@ -29,7 +37,7 @@ class Http {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
         'Access-Control-Allow-Origin': '*',
-        'Authorization': Http.token,
+        'Authorization': AuthHelper.getAccessToken() ? AuthHelper.getAccessToken() : null,
         ...headers,
       },
     };
