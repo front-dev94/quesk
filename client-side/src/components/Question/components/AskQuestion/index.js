@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {Button, Modal, ModalBody, ModalHeader, ModalFooter} from 'reactstrap';
+import {QuestionService} from 'services';
 import AskQuestionForm from './components/AskQuestionForm';
+
 import './style.scss';
 
 class AskQuestion extends Component {
@@ -11,7 +13,7 @@ class AskQuestion extends Component {
       isOpen: false
     };
 
-    this.form = null;
+    this.form = React.createRef();
   }
 
   toggleModal = () => {
@@ -28,13 +30,21 @@ class AskQuestion extends Component {
   };
 
   save = async () => {
-    console.log(this.form)
-    // this.form.handleSubmit();
-    // const {values} = this.form.state;
-    // const isValid = await this.isFormValid(values);
-    // if (isValid) {
+    this.form.handleSubmit();
+    const {values} = this.form;
+    if (this.form.isValid) {
 
-    // }
+      const question = {
+        title: values.title,
+        content: values.content
+      };
+
+      const response = await QuestionService.createQuestion(question);
+
+      if(!response.error){
+        this.form.resetForm();
+      }
+    }
   };
 
   close = () => this.setState({isOpen: false});
@@ -50,7 +60,7 @@ class AskQuestion extends Component {
             Ask question
           </ModalHeader>
           <ModalBody>
-            <AskQuestionForm getForm={this.getForm}/>
+            <AskQuestionForm getForm={this.getForm} onSubmit={this.handleSubmit} />
           </ModalBody>
           <ModalFooter>
             <Button color="primary" outline onClick={this.save}>Save</Button>

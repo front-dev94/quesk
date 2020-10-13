@@ -3,16 +3,16 @@ import {Redirect, Route} from 'react-router-dom';
 
 // Components
 import Profile from './../screens/profile/Profile';
-import Dashboard from 'components/Dashboard';
+import Home from 'components/Home';
 import { QuestionPage } from 'components/Question';
-
+import MyQuestions from 'components/Question/components/MyQuestions';
 
 // Constants
 export const ROUTES = [
     {
         path: '/',
-        name: 'Dashboard',
-        component: Dashboard
+        name: 'Home',
+        component: Home
     },
     {
         path: '/questions/:id',
@@ -23,6 +23,11 @@ export const ROUTES = [
         path: '/profile',
         name: 'Profile',
         component: Profile
+    },
+    {
+        path: '/profile/my-questions',
+        name: 'My questions',
+        component: MyQuestions
     }
 ].map(item => ({
     ...item,
@@ -41,6 +46,15 @@ export const PrivateRoute = ({ user, component: Component, ...rest }) => {
                 }} />
             }
             
+            // authorised so return component
+            return <Component {...props} />
+        }} />
+    );
+}
+
+export const PublicRoute = ({ user, component: Component, ...rest }) => {
+    return (
+        <Route {...rest} render={props => {
             // authorised so return component
             return <Component {...props} />
         }} />

@@ -2,7 +2,7 @@ import React, {Component, Suspense} from 'react';
 import {Router} from "react-router";
 import {Redirect, Route, Switch} from 'react-router-dom';
 import history from "store/history";
-import { ROUTES, PrivateRoute } from 'routes';
+import { ROUTES, PrivateRoute, PublicRoute } from 'routes';
 import {connect} from 'react-redux';
 import {UserActions} from "actions";
 import AuthHelper from "utils/helpers/authHelper";
@@ -14,6 +14,7 @@ import SignUp from './screens/anonymous/sign-up';
 import Profile from './screens/profile';
 
 import './App.scss';
+
 
 class App extends Component {
   constructor(props) {
@@ -42,7 +43,7 @@ class App extends Component {
     const {user} = this.props;
     return ROUTES.map((route, idx) => {
       return (
-        <PrivateRoute
+        <Route
           exact
           user={user}
           key={idx}
@@ -55,25 +56,27 @@ class App extends Component {
 
   render() {
     const {isReady} = this.state;
-    if (!isReady) {
-        return <div/>
-    }
     const {user} = this.props;
+
+    if (!isReady)
+        return <div/>
     return (
       <Router history={history}>
-        {user && <Header user={user} history={history} logout={this.logout}/>}
         <Suspense fallback={<div>Loading</div>}>
-            {user && <div className="app-container">
+          <div className="main">
+            <Header user={user} history={history} logout={this.logout}/>
+            <Suspense fallback={<div>Loading</div>}>
+              <div className="app-container">
                 <div className="container">
                   <Switch>
-                      {this.renderRoutes()}
-                      <Route exact path="/profile" component={Profile}/>
+                    {this.renderRoutes()}
                   </Switch>
                 </div>
-            </div>}
-            <Route exact path="/login" component={Login}/>
-            <Route exact path="/sign-up" component={SignUp}/>
-            {!user && <Redirect from="/" to="/login"/>}
+              </div>
+            </Suspense>
+          </div>
+          <PublicRoute exact path="/login" component={Login}/>
+          <PublicRoute exact path="/sign-up" component={SignUp}/>
         </Suspense>
       </Router>
     )

@@ -5,7 +5,10 @@ export const userInfoFormatter = (response, credentials = {}) => {
             return {
                 accessToken: token,
                 username: user.username,
-                email: user.email
+                id: user._id,
+                email: user.email,
+                firstName: user.firstName,
+                lastName: user.lastName
             };
         }
     }

@@ -13,14 +13,14 @@ class AskQuestionForm extends Component {
     const {getForm} = this.props;
     return (
       <Formik
-        ref={getForm}
+        innerRef={getForm}
         onSubmit={(values) => {}}
         validationSchema={askQuestionSchema}
         validateOnChange={false}
         enableReinitialize
         initialValues={{
-          title: undefined,
-          content: undefined
+          title: '',
+          content: ''
         }}
         render={props => {
           return (
@@ -32,7 +32,7 @@ class AskQuestionForm extends Component {
                 {...props}
               />
               <Textarea
-                id="description"
+                id="content"
                 name="description"
                 label="Description"
                 {...props}

@@ -90,4 +90,83 @@
             }
         }
     }
+
+    .question-answers{
+        .question-answer{
+            position: relative;
+            margin-top: 20px;
+            padding: 24px;
+            background-color: #fff;
+            border-radius: 3px;
+            border: none;
+            box-shadow: 0 1px 15px rgba(0, 0, 0, 0.04), 0 1px 6px rgba(0, 0, 0, 0.04);
+
+            .answer-content{
+                position: relative;
+                margin-top: 20px;
+                p{
+                    margin-bottom: 0;
+                }
+            }
+            .answer-author{
+                display: flex;
+                display: -webkit-flex;
+
+                align-items: center;
+                -webkit-align-items: center;
+
+                .author-avatar{
+                    position: relative;
+                    width: 32px;
+                    height: 32px;
+                    border-radius: 50%;
+                    display: inline-block;
+                    background: #ced4da no-repeat 50%/cover;
+                    position: relative;
+                    text-align: center;
+                    color: #fff;
+                    font-weight: 600;
+                    vertical-align: bottom;
+                    font-size: .875rem;
+                    margin-right: 10px;
+                    line-height: 32px;
+                }
+
+                .author-info{
+                    h5{
+                        margin-bottom: 0;
+                        font-weight: 600;
+                        font-size: 18px;
+                    }
+
+                    span{
+                        font-size: 14px;
+                    }
+
+                    a{
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+    }
+
+    .write-answer-message{
+        position: relative;
+        background: #f8f8f8;
+        padding: 24px;
+        border-radius: 4px;
+        border: 1px solid #bdc3c7;
+        margin-top: 40px;
+        text-align: center;
+
+        p{
+            margin-bottom: 0px;
+        }
+    }
+
+    .justify-space-between{
+        justify-content: space-between;
+        -webkit-justify-content: space-between;
+    }
 }

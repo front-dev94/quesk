@@ -1,6 +1,8 @@
-const jwt = require("jsonwebtoken");
 
-module.exports = function(req, res, next) {
+import jwt from 'jsonwebtoken';
+import { JWT_SECRET } from '../../config/constants';
+
+const Auth = (req, res, next) => {
   //get the token from the header if present
   const token = req.headers["x-access-token"] || req.headers["authorization"];
   //if no token found, return response (without going to the next middelware)
@@ -8,7 +10,7 @@ module.exports = function(req, res, next) {
 
   try {
     //if can verify the token, set req.user and pass to next middleware
-    const decoded = jwt.verify(token, process.env.TOKEN_SECRET);
+    const decoded = jwt.verify(token, JWT_SECRET);
     req.user = decoded;
     next();
   } catch (e) {
@@ -16,3 +18,5 @@ module.exports = function(req, res, next) {
     res.status(400).send("Invalid token.");
   }
 };
+
+export default Auth;

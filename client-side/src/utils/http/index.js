@@ -11,8 +11,8 @@ class Http {
     return await Http.fetchWrapper(url, params, null, headers, METHOD_GET);
   }
 
-  static async post(url, data, params, headers) {
-    return await Http.fetchWrapper(url, params, data, headers, METHOD_POST);
+  static async post(url, data) {
+    return await Http.fetchWrapper(url, null, data, null, METHOD_POST);
   }
 
   static async put(url, data, params, headers) {
