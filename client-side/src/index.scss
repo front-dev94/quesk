@@ -14,6 +14,11 @@
 @import "assets/stylesheets/mixins.scss";
 @import "./App.scss";
 
+body, html{
+  height: 100%;
+  width: 100%;
+}
+
 body {
   font-family: 'Nunito',sans-serif;
   line-height: 1.5;

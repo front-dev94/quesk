@@ -1,16 +1,16 @@
-import Http from "utils/http";
+import Http from './../../utils/http';
 
 class QuestionService {
-    static async getAllQuestions() {
-        return await Http.get("/dashboard/questions");
-    }
-
-    static async getAllUserQuestions(id){
-        return await Http.get("/dashboard/questions/my-questions/" + id);
+    static async getAllQuestions(query) {
+        return await Http.get("/dashboard/questions/?" + query);
     }
 
     static async getQuestion(id) {
         return await Http.get("/dashboard/questions/" + id);
+    }
+
+    static async getAllUserQuestions(id, query){
+        return await Http.get("/dashboard/questions/my-questions/" + id + "/?" + query);
     }
 
     static async voteQuestionUp(id) {

@@ -17,7 +17,6 @@ const PanelCard = ({className, children, title, lg, md, sm, xs}) => {
   );
 };
 
-
 PanelCard.propTypes = {
   children: PropTypes.any,
   className: PropTypes.string,

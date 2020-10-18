@@ -4,9 +4,16 @@ import './style.scss';
 
 const PageContent = ({className, title, children}) => {
   return (
-    <div className={classnames("page-content", className)}>
-      <div className="page-title">{title}</div>
-      {children}
+    <div className="page-layout">
+      <div className="page-top-bg"></div>
+      <div className="page-content">
+        <div className="container">
+          <div className="page-title">{title}</div>
+          <div className="page-card">
+            {children}
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

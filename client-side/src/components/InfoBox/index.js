@@ -6,7 +6,6 @@ const InfoBox = ({className, message}) => (
   <div className={classnames("info-box", className)}>
     {message}
   </div>
-
 );
 
 export default InfoBox;

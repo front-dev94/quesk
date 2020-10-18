@@ -1,0 +1,62 @@
+.linear-loader {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 3px;
+	overflow: hidden;
+	background-color: #ecf0f1;
+}
+
+.determinate {
+	position: relative;
+	max-width: 100%;
+	height: 100%;
+	-webkit-transition: width 500ms ease-out 1s;
+	-moz-transition: width 500ms ease-out 1s;
+	-o-transition: width 500ms ease-out 1s;
+	transition: width 500ms ease-out 1s;
+	background-color: #3498db;
+}
+
+.indeterminate {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	&:before {
+		content: '';
+		position: absolute;
+		height: 100%;
+		background-color: #3498db;
+		animation: indeterminate_first 1.5s infinite ease-out;
+	}
+	&:after {
+		content: '';
+		position: absolute;
+		height: 100%;
+		background-color: #ecf0f1;
+		animation: indeterminate_second 1.5s infinite ease-in;
+	}
+}
+
+@keyframes indeterminate_first {
+	0% {
+		left: -100%;
+		width: 100%;
+	}
+	100% {
+		left: 100%;
+		width: 10%;
+	}
+}
+
+@keyframes indeterminate_second {
+	0% {
+		left: -150%;
+		width: 100%;
+	}
+	100% {
+		left: 100%;
+		width: 10%;
+	}
+}

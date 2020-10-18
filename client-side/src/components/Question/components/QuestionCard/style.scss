@@ -1,47 +1,83 @@
 .question-item{
+    position: relative;
+
     display: flex;
     display: -webkit-flex;
 
-    padding: 1.75rem;
-    background: #fff;
-    box-shadow: 0 1px 15px rgba(0,0,0,.04), 0 1px 6px rgba(0,0,0,.04);
-    border-radius: 10px;
+    flex-direction: column;
+    -webkit-flex-direction: column;
 
+    
+    background: #fff;
+
+    border-radius: 10px;
     margin-bottom: 20px;
+    border-radius: 4px;
+
+    border: 1px solid #dddfe2;
+
+    .question-badge{
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        width: 24px;
+        font-size: 24px;
+        height: 34px;
+        color: #eb4d4b;
+        text-align: center;
+    }
+
+    .question-content{
+        position: relative;
+        min-height: 100px;
+    }
 
     .question-rating{
         display: flex;
         display: -webkit-flex;
 
-        flex-direction: column;
-        -webkit-flex-direction: column;
-
         align-items: center;
         -webkit-align-items: center;
 
         text-align: center;
-        margin-right: 20px;
+
+        border-top: 1px solid #eee;
 
         .question-likes, .question-answers{
             padding: 10px;
-            border-radius: 3px;
             font-size: 14px;
             width: 100%;
+            background: #f8f8f8;
+
+            i{
+                margin-right: 5px;
+            }
         }
+
         .question-answers{
-            background: #74b9ff;
-            margin-top: 10px;
-            color: #fff;
+            color: #45aaf2;
+        }
+
+        .question-likes{
+            &.likes{
+                color: #45aaf2;
+            }
+            &.dislikes{
+                color: #fc5c65;
+            }
         }
         
         span{
             display: block;
             font-weight: 600;
-            font-size: 20px;
         }
     }
 
     .question-info{
+        position: relative;
+        min-height: 280px;
+        padding: 1.75rem;
+
         .question-header{
             position: relative;
 
@@ -53,25 +89,9 @@
 
             margin-bottom: 20px;
 
-            .question-author-image{
-                position: relative;
-                width: 42px;
-                height: 42px;
-                border-radius: 50%;
-                display: inline-block;
-                background: #9b59b6 no-repeat 50%/cover;
-                text-align: center;
-                color: #fff;
-                font-weight: 600;
-                vertical-align: bottom;
-                font-size: .875rem;
-                margin-right: 10px;
-                line-height: 45px;
-            }
-
             .question-title{
                 a{
-                    font-size: 1.5rem;
+                    font-size: 22px;
                     margin-bottom: 0;
                     font-weight: 600;
 
@@ -84,6 +104,10 @@
                     margin-bottom: 0px;
                 }
             }
+        }
+
+        p{
+            font-size: 14px;
         }
 
         .tags{

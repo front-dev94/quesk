@@ -1,0 +1,85 @@
+.user-item{
+    position: relative;
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: column;
+    background: #fff;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    border: 1px solid #dddfe2;
+
+    .user-badge{
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        width: 24px;
+        font-size: 24px;
+        height: 34px;
+        color: #eb4d4b;
+        text-align: center;
+    }
+
+    .user-info{
+        position: relative;
+        display: flex;
+        display: -webkit-flex;
+
+        align-items: center;
+        -webkit-align-items: center;
+
+        justify-content: center;
+        -webkit-justify-content: center;
+
+        flex-direction: column;
+        -webkit-flex-direction: column;
+
+        min-height: 230px;
+        padding: 1.75rem;
+
+        .user-avatar{
+            position: relative;
+            display: block;
+            border-radius: 50%;
+            display: inline-block;
+            background: #ced4da no-repeat 50%/cover;
+            width: 60px;
+            height: 60px;
+            text-align: center;
+            color: #868e96;
+            font-weight: 600;
+            font-size: 22px;
+            margin-bottom: 10px;
+            line-height: 60px;
+        }
+
+        .name{
+            font-size: 22px;
+            line-height: 1.05;
+            color: #393b3e;
+        }
+
+        .email {
+            padding-top: 8px;
+            font-size: 16px;
+            line-height: 1.38;
+            color: #7b7e81;
+        }
+
+        .score{
+            display: flex;
+            display: -webkit-flex;
+
+            align-items: center;
+            -webkit-align-items: center;
+
+            margin-top: 10px;
+
+            i{
+                margin-right: 10px;
+                color: #45aaf2;
+            }
+
+        }
+    }
+}

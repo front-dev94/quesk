@@ -1,74 +1,56 @@
-import React, { Component } from 'react';
-import {connect} from 'react-redux';
-import PageContent from 'components/PageContent';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+
+import { Row } from 'reactstrap';
+import PageContent from './../../../PageContent';
 import QuestionCard from './../QuestionCard';
 
-import {QuestionService} from 'services';
-
-import './style.scss';
+import QuestionService from './../../../../services/QuestionService';
+import { queryString } from './../../../../utils/helpers/queryString';
 
 const PAGE_TITLE = "My questions";
 
-class MyQuestions extends Component {
-  constructor(props) {
-    super(props);
+const MyQuestions = () => {
+  const user = useSelector(state => state.user);
 
-    this.state = {
-      questions: []
-    }
-  }
+  const [questions, setQuestions] = useState({
+    page: 1,
+    size: 10,
+    count: 0,
+    payload: []
+  });
 
-  async componentDidMount(){
-    await this.getData();
-  }
+  useEffect(() => {
+    getData();
+  }, []);
 
-  async getData() {
-    const {user} = this.props;
-
+  const getData = async (page = questions.page, size = questions.size) => {
     if(user){
-      this.setState({
-        user
-      }, async () => {
-        const {user} = this.state;
-        const questions = await QuestionService.getAllUserQuestions(user.id);
-    
-        if(!questions.error){
-          this.setState({
-            questions: questions.data
-          })
-        }
-      });
+      const questions = await QuestionService.getAllUserQuestions(user.id, queryString({page, size}));
+
+      if(!questions.error && questions.data){
+        setQuestions(questions.data)
+      }
     }
   }
 
-  async componentDidUpdate(prevProps){
-    if(prevProps.user != this.props.user){
-      await this.getData();
+  const renderQuestionCards = () => {
+    if(questions.payload && questions.payload.length > 0){
+      return (
+        <Row>
+          {questions.payload.map((item, idx) => {
+              return <QuestionCard question={item} key={idx} />
+            })}
+        </Row>
+      )
     }
   }
 
-  renderQuestionCards = () => {
-    const {questions} = this.state;
-
-    if(questions.length > 0){
-      return questions.map((item, idx) => {
-        return <QuestionCard question={item} key={idx} />
-      })
-    }
-  }
-  
-  render() {
-    return (
-      <PageContent title={PAGE_TITLE}>
-        {this.renderQuestionCards()}
-      </PageContent>
-    );
-  }
+  return (
+    <PageContent title={PAGE_TITLE}>
+      {renderQuestionCards()}
+    </PageContent>
+  )
 }
 
-const mapStateToProps = state => ({
-  user: state.user
-});
-
-export default connect(mapStateToProps, null)(MyQuestions);
-
+export default MyQuestions;

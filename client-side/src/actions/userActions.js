@@ -1,5 +1,5 @@
 import * as ACTION_TYPES from './actionTypes';
-import AuthHelper from 'utils/helpers/authHelper';
+import AuthHelper from './../utils/helpers/authHelper';
 
 class UserActions {
   static setUser(user) {
