@@ -1,10 +1,10 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import mongoose from 'mongoose';
 
-import User from '../models/User';
 import Service from './service';
-
 import { JWT_SECRET } from '../../config/constants';
+import User from './../models/User';
 
 
 class AuthService extends Service {
@@ -57,7 +57,7 @@ class AuthService extends Service {
     }
   }
 
-  async signUp(req){
+  async signUp(req, res){
     try {
         const result = await this.model.findOne({email: req.body.email});
 
@@ -71,11 +71,15 @@ class AuthService extends Service {
                 firstName: req.body.firstName,
                 lastName: req.body.lastName,
                 email: req.body.email,
-                password: req.body.password
+                password: req.body.password,
+                questionScore: 0,
+                answerScore: 0
             });
+
             const salt = await bcrypt.genSalt(10);
             user.password = await bcrypt.hash(user.password, salt);
-            await user.save();
+
+            user.save();
 
             const token = jwt.sign({ _id: user._id }, JWT_SECRET);
 

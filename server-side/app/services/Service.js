@@ -10,6 +10,15 @@ class Service {
   }
   
   async getAll(query) {
+
+    let { skip, limit } = query;
+
+    skip = skip ? Number(skip) : 0;
+    limit = limit ? Number(limit) : 10;
+
+    delete query.skip;
+    delete query.limit;
+
     if (query._id) {
       try {
         query._id = new mongoose.mongo.ObjectId(query._id);
@@ -19,7 +28,10 @@ class Service {
     }
 
     try {
-      let items = await this.model.find(query);
+      let items = await this.model
+      .find(query)
+      .skip(skip)
+      .limit(limit);
 
       let total = await this.model.count();
 

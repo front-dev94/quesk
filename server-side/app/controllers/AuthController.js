@@ -23,7 +23,7 @@ class AuthController extends Controller {
   }
 
   async signUp(req, res){
-    let response = await this.service.signUp(req);
+    let response = await this.service.signUp(req, res);
     if (response.error) return res.status(response.statusCode).send(response);
 
     if(response.data && response.data.token)

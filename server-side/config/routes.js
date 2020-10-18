@@ -15,6 +15,7 @@ export default (router) => {
     router.get(`/api/dashboard/questions/:id`, QuestionController.getQuestion);
     router.put(`/api/dashboard/questions/:id`, Auth, QuestionController.update);
     router.delete(`/api/dashboard/questions/:id`, Auth, QuestionController.delete);
+
     router.get(`/api/dashboard/questions/my-questions/:id`, Auth, QuestionController.getAllUserQuestions);
     router.post(`/api/dashboard/questions`, Auth, QuestionController.createQuestion);
     router.post(`/api/dashboard/questions/:id/vote-up`, Auth, QuestionController.voteUp);
@@ -28,5 +29,6 @@ export default (router) => {
 
     // User routes
     router.get(`/api/dashboard/users`, UserController.getAll);
-    router.get(`/api/dashboard/users`, UserController.getSpecificUser);
+    router.get(`/api/dashboard/users/top-performers`, UserController.getTopNUsers);
+    router.get(`/api/dashboard/users/:id`, UserController.getUser);
 }

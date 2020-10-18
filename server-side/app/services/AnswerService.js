@@ -32,10 +32,14 @@ class AnswerService extends Service {
             answer.save()
 
             let question = await Question.findById(req.params.questionId);
+            let user = await User.findById(answer.author._id);
 
-            if(question){
+            if(question && user){
                 question.answers.push(answer._id);
                 question.save();
+
+                user.answerScore = user.answerScore + 1;
+                user.save();
 
                 return {
                     error: false,

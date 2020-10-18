@@ -17,7 +17,7 @@ class QuestionController extends Controller {
   }
 
   async getAllQuestions(req, res){
-    let response = await this.service.getAllQuestions(req);
+    let response = await this.service.getAllQuestions(req.query);
     if (response.error) return res.status(response.statusCode).send(response);
     return res.send(response);
   }
@@ -29,7 +29,7 @@ class QuestionController extends Controller {
   }
 
   async getAllUserQuestions(req, res){
-    let response = await this.service.getAllUserQuestions(req.params.id);
+    let response = await this.service.getAllUserQuestions(req.params.id, req.query);
     if (response.error) return res.status(response.statusCode).send(response);
     return res.send(response);
   }

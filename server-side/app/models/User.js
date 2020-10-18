@@ -29,7 +29,9 @@ let userSchema = new Schema({
       required: true,
       minlength: 5,
       maxlength: 1024
-  }
+  },
+  questionScore: {type: Number},
+  answerScore: {type: Number}
 }, { timestamps: true });
 
 let User = mongoose.model('User', userSchema);

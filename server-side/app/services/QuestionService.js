@@ -1,3 +1,4 @@
+import User from '../models/User';
 import Service from './service';
 
 class QuestionService extends Service {
@@ -12,9 +13,20 @@ class QuestionService extends Service {
     this.voteDown = this.voteDown.bind(this);
   }
 
-  async getAllQuestions() {
+  async getAllQuestions(query) {
     try {
+      let { page, size } = query;
+
+      page = page ? Number(page) : 1;
+      size = size ? Number(size) : 10;
+
+      delete query.page,
+      delete query.size;
+
       let items = await this.model.find()
+        .sort(query)
+        .skip((page - 1) * size)
+        .limit(size)
         .populate('upVotes', 'username firstName lastName')
         .populate('downVotes', 'username firstName lastName')
         .populate('author', 'username firstName lastName')
@@ -27,16 +39,23 @@ class QuestionService extends Service {
             }
         })
 
+      let count = await this.model.countDocuments();
+
       return {
         error: false,
         statusCode: 200,
-        data: items
+        data: {
+          page,
+          size,
+          count,
+          payload: items
+        }
       };
-    } catch (errors) {
+    } catch (e) {
       return {
         error: true,
         statusCode: 500,
-        errors
+        message: e || "Not able to get questions"
       };
     }
   }
@@ -60,7 +79,7 @@ class QuestionService extends Service {
           return {
             error: true,
             statusCode: 404,
-            errors: "Question not found!"
+            errors: "Question not found."
           }
         }
 
@@ -69,18 +88,29 @@ class QuestionService extends Service {
           statusCode: 200,
           data: item
         }
-    } catch (errors) {
+    } catch (e) {
       return {
         error: true,
         statusCode: 500,
-        errors
+        message: e || "Not able to get getQuestion."
       };
     }
   }
 
-  async getAllUserQuestions(userId) {
+  async getAllUserQuestions(userId, query) {
     try {
+      let { page, size } = query;
+
+      page = page ? Number(page) : 0;
+      size = size ? Number(size) : 10;
+
+      delete query.page,
+      delete query.size;
+
       let items = await this.model.find({author: userId})
+        .sort(query)
+        .skip(page)
+        .limit(size)
         .populate('upVotes', 'username firstName lastName')
         .populate('downVotes', 'username firstName lastName')
         .populate('author', 'username firstName lastName')
@@ -93,16 +123,23 @@ class QuestionService extends Service {
             }
         })
 
+      let count = await this.model.countDocuments();
+
       return {
         error: false,
         statusCode: 200,
-        data: items
+        data: {
+          page,
+          size,
+          count,
+          payload: items
+        }
       };
     } catch (e) {
       return {
         error: true,
         statusCode: 500,
-        message: e || "Not able to get user questions"
+        message: e || "Not able to get user questions."
       };
     }
   }
@@ -114,7 +151,7 @@ class QuestionService extends Service {
           return {
             error: true,
             statusCode: 400,
-            message: "Title can not be empty. Please try again!"
+            message: "Title can not be empty."
           }
       }
 
@@ -125,10 +162,19 @@ class QuestionService extends Service {
         tags: req.body.tags,
         author: req.user._id,
         upVotes: [],
-        downVotes: []
+        downVotes: [],
+        voteScore: 0
       });
 
       if(question){
+
+        let user = await User.findById(question.author._id);
+
+        if(user){
+          user.questionScore = user.questionScore + 1;
+          user.save();
+        }
+        
         return {
           error: false,
           statusCode: 200,
@@ -139,7 +185,7 @@ class QuestionService extends Service {
       return {
         error: true,
         statusCode: 500,
-        message: e.message || "Not able to create question"
+        message: e || "Not able to create question."
       };
     }
   }
@@ -152,11 +198,12 @@ class QuestionService extends Service {
             return {
                 error: true,
                 statusCode: 404,
-                message: "Question not found"
+                message: "Question not found."
             }
         }
         
         question.upVotes.push(userId);
+        question.voteScore = question.voteScore + 1;
         question.save();
         
         return {
@@ -168,7 +215,7 @@ class QuestionService extends Service {
       return {
         error: true,
         statusCode: 500,
-        message: e.message || "Not able to vote up"
+        message: e || "Not able to vote up."
       };
     }
   }
@@ -180,11 +227,12 @@ class QuestionService extends Service {
             return {
                 error: true,
                 statusCode: 404,
-                message: "Question not found"
+                message: "Question not found."
             }
         }
         
         question.downVotes.push(userId);
+        question.voteScore = question.voteScore - 1;
         question.save();
         
         return {
@@ -196,7 +244,7 @@ class QuestionService extends Service {
       return {
         error: true,
         statusCode: 500,
-        message: e.message || "Not able to vote down"
+        message: e || "Not able to vote down."
       };
     }
   }

@@ -1,7 +1,6 @@
 import Controller from './controller';
+import User from './../models/User';
 import UserService from './../services/UserService';
-
-import User from '../models/User';
 
 const userService = new UserService(User);
 
@@ -9,11 +8,18 @@ class UserController extends Controller {
   constructor(service) {
     super(service);
 
-    this.getSpecificUser = this.getSpecificUser.bind(this);
+    this.getUser = this.getUser.bind(this);
+    this.getTopNUsers = this.getTopNUsers.bind(this);
+  }
+  
+  async getUser(req, res){
+    let response = await this.service.getUser(req);
+    if (response.error) return res.status(response.statusCode).send(response);
+    return res.send(response);
   }
 
-  async getSpecificUser(req, res){
-    let response = await this.service.getSpecificUser(req.id);
+  async getTopNUsers(req, res){
+    let response = await this.service.getTopNUsers(req, res);
     if (response.error) return res.status(response.statusCode).send(response);
     return res.send(response);
   }
