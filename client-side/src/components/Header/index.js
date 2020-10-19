@@ -14,7 +14,7 @@ const Header = ({user, history, logout}) => {
       <Container>
         <Navbar expand="md">
           <div className="header-logo-search d-flex align-items-center">
-            <NavbarBrand href="/">
+            <NavbarBrand onClick={() => history.push("/")}>
               <span>Quesk</span>
             </NavbarBrand>
             <div className="search">
