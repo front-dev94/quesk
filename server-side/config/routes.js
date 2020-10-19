@@ -5,7 +5,6 @@ import UserController from "../app/controllers/UserController";
 import AnswerController from "../app/controllers/AnswerController";
 
 export default (router) => {
-
     // Auth routes
     router.post(`/api/auth/login`, AuthController.login);
     router.post(`/api/auth/sign-up`, AuthController.signUp);
@@ -20,15 +19,19 @@ export default (router) => {
     router.post(`/api/dashboard/questions`, Auth, QuestionController.createQuestion);
     router.post(`/api/dashboard/questions/:id/vote-up`, Auth, QuestionController.voteUp);
     router.post(`/api/dashboard/questions/:id/vote-down`, Auth, QuestionController.voteDown);
+    router.put(`/api/dashboard/questions/:id/`, Auth, QuestionController.update);
+    router.delete(`/api/dashboard/questions/:id/`, Auth, QuestionController.delete);
 
     // Answer routes
     router.post(`/api/dashboard/questions/:questionId/answers`, Auth, AnswerController.createAnswer);
     router.post(`/api/dashboard/questions/:questionId/answers/:answerId/vote-up`, Auth, AnswerController.voteUp);
     router.post(`/api/dashboard/questions/:questionId/answers/:answerId/vote-down`, Auth, AnswerController.voteDown);
-
+    router.put(`/api/dashboard/questions/:questionId/answers/:id`, Auth, AnswerController.update);
+    router.delete(`/api/dashboard/questions/:questionId/answers/:id`, Auth, AnswerController.delete);
 
     // User routes
     router.get(`/api/dashboard/users`, UserController.getAll);
     router.get(`/api/dashboard/users/top-performers`, UserController.getTopNUsers);
     router.get(`/api/dashboard/users/:id`, UserController.getUser);
+    router.put(`/api/dashboard/users/:id`, UserController.update);
 }

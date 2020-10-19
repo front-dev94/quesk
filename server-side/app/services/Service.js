@@ -71,7 +71,7 @@ class Service {
 
   async update(id, data) {
     try {
-      let item = await this.model.findByIdAndUpdate(id, data, { new: true });
+      let item = await this.model.findOneAndUpdate({_id: id}, data, { new: true });
       return {
         error: false,
         statusCode: 202,
@@ -89,13 +89,14 @@ class Service {
   async delete(id) {
     try {
       let item = await this.model.findByIdAndDelete(id);
-      if (!item)
+      if (!item){
         return {
           error: true,
           statusCode: 404,
           message: "item not found"
         };
-
+      }
+        
       return {
         error: false,
         deleted: true,

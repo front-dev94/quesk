@@ -1,11 +1,8 @@
-import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import mongoose from 'mongoose';
-
+import bcrypt from 'bcrypt';
 import Service from './service';
-import { JWT_SECRET } from '../../config/constants';
-import User from './../models/User';
 
+import { JWT_SECRET } from '../../config/constants';
 
 class AuthService extends Service {
   constructor(model) {
@@ -75,9 +72,6 @@ class AuthService extends Service {
                 questionScore: 0,
                 answerScore: 0
             });
-
-            const salt = await bcrypt.genSalt(10);
-            user.password = await bcrypt.hash(user.password, salt);
 
             user.save();
 

@@ -1,5 +1,7 @@
 import Service from './Service';
 import Question from './../models/Question';
+import mongoose from 'mongoose';
+import User from './../models/User';
 
 class AnswerService extends Service {
     constructor(model) {
@@ -32,7 +34,7 @@ class AnswerService extends Service {
             answer.save()
 
             let question = await Question.findById(req.params.questionId);
-            let user = await User.findById(answer.author._id);
+            let user = await User.findById(req.user._id);
 
             if(question && user){
                 question.answers.push(answer._id);

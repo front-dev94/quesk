@@ -1,5 +1,5 @@
-import User from '../models/User';
 import Service from './service';
+import User from './../models/User';
 
 class QuestionService extends Service {
   constructor(model) {
@@ -168,7 +168,7 @@ class QuestionService extends Service {
 
       if(question){
 
-        let user = await User.findById(question.author._id);
+        let user = await User.findById(req.user._id);
 
         if(user){
           user.questionScore = user.questionScore + 1;

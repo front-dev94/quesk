@@ -3,7 +3,7 @@ import User from './User';
 
 let answerSchema = new Schema({
   content: String,
-  author: { type: Schema.Types.ObjectId, ref: User, required: true },
+  author: { type: Schema.Types.ObjectId, ref: User },
   upVotes: [{ type: Schema.Types.ObjectId, ref: User}],
   downVotes: [{ type: Schema.Types.ObjectId, ref: User}]
 }, { timestamps: true });

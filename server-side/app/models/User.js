@@ -1,4 +1,5 @@
 import mongoose, {Schema} from 'mongoose';
+import bcrypt from 'bcrypt';
 
 let userSchema = new Schema({
   username: {
@@ -33,6 +34,24 @@ let userSchema = new Schema({
   questionScore: {type: Number},
   answerScore: {type: Number}
 }, { timestamps: true });
+
+userSchema.pre("save", async function(next) {
+    if (this.password) {
+        let salt = await bcrypt.genSalt(10);
+        this.password = await bcrypt.hash(this.password, salt);
+    }
+    next();
+});
+
+userSchema.pre('findOneAndUpdate', async function(next) {
+    const update = this.getUpdate();
+    if (update.password) {
+        let salt = await bcrypt.genSalt(10);
+        this.getUpdate().password = await bcrypt.hash(update.password, salt);
+    } else {
+        next();
+    }
+});
 
 let User = mongoose.model('User', userSchema);
 
