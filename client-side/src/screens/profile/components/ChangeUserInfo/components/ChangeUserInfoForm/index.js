@@ -12,14 +12,14 @@ const ChangeUserInfoForm = ({onSubmit, user}) => {
       isInitialValid={true}
       validationSchema={changeUserInfoSchema}
       initialValues={{
-        username: user.username || '',
-        firstName: user.firstName || '',
-        lastName: user.lastName || '',
-        email: user.email || '',
+        username: user && user.username || '',
+        firstName: user && user.firstName || '',
+        lastName: user && user.lastName || '',
+        email: user && user.email || '',
         oldPassword: '',
         password: '',
         confirmPassword: "",
-        hasError: undefined
+        hasError: false
       }}
       render={props => {
         return (

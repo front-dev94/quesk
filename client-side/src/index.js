@@ -1,15 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { usePromiseTracker } from "react-promise-tracker";
+
 import * as serviceWorker from './serviceWorker';
 import {Provider} from 'react-redux';
-import { configureStore } from 'store';
-import { usePromiseTracker } from "react-promise-tracker";
+import { configureStore } from './store';
 
 import Loader from './components/Loader';
 import App from './App';
 
 import 'bootstrap/dist/css/bootstrap.css';
-import 'assets/stylesheets/feather.scss';
+import './assets/stylesheets/feather.scss';
 import './index.scss';
 
 const store = configureStore();

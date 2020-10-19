@@ -4,11 +4,13 @@ import AskQuestionForm from './components/AskQuestionForm';
 import QuestionService from './../../../../services/QuestionService';
 
 import './style.scss';
+import ConfirmModal from './../../../ConfirmModal/index';
 
-const AskQuestion = (props) => {
+const AskQuestion = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [tags, setTags] = useState([]);
   const form = useRef(null);
+  const confirmModal = useRef();
 
   const toggleModal = () => setIsOpen(!isOpen);
   
@@ -19,7 +21,6 @@ const AskQuestion = (props) => {
 
   const save = async () => {
     form.current.handleSubmit();
-
     const {values} = form.current;
 
     const isValid = await isFormValid(form.current, values)
@@ -51,6 +52,7 @@ const AskQuestion = (props) => {
   return (
     <div>
       <Button className="ask-question-btn" onClick={() => toggleModal()}>Ask question</Button>
+      <ConfirmModal forwardedRef={confirmModal} />
       <Modal contentClassName="ask-question-modal" isOpen={isOpen} centered>
         <ModalHeader toggle={close}>
           Ask question

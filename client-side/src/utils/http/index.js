@@ -43,7 +43,7 @@ class Http {
       params: params
     };
 
-    if (method === METHOD_POST && data) {
+    if ((method === METHOD_POST || method === METHOD_PUT) && data) {
       options.body = JSON.stringify(data);
     }
 

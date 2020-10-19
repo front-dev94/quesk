@@ -122,7 +122,6 @@ const Home = () => {
       <div className="d-flex">
         <div className="tabs">
           {TABS.map((item, idx) => {
-            console.log(activeTab)
             return (
               <button
                 key={idx}

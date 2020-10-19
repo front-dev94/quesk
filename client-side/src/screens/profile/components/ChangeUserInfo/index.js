@@ -4,13 +4,26 @@ import ChangeUserInfoForm from './components/ChangeUserInfoForm';
 import UserService from '../../../../services/UserService';
 import './style.scss';
 
-const ChangeUserInfo = ({user, setUser}) => {
+const ChangeUserInfo = ({user, setUser, getData}) => {
 
-  // const removeEmpty = (obj) => {
-  //   return Object.keys(obj).forEach(key => obj[key] == null && delete obj[key]);
-  // }
+  const handleSaveChanges = async (values, {resetForm, validateForm, setFieldValue}) => {
+    const response = await UserService.updateUser(user.id, {
+      username: values.username,
+      firstName: values.firstName,
+      lastName: values.lastName,
+      email: values.email,
+      password: values.password
+    });
+    
+    setFieldValue("hasError", false);
 
-  const handleSaveChanges = (values, actions) => {
+    if (!response.error) {
+        resetForm();
+        setUser(response);
+    } else {
+        setFieldValue("hasError", true);
+        validateForm({});
+    }
   }
 
   return (

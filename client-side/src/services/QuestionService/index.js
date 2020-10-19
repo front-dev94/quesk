@@ -32,18 +32,6 @@ class QuestionService {
     static async updateQuestion(id, question) {
         return await Http.put("/dashboard/questions/" + id, question);
     }
-
-    static async answerOnQuestion(id, content) {
-        return await Http.post("/dashboard/questions/" + id + "/answers", content);
-    }
-
-    static async voteAnswerUp(questionId, answerId) {
-        return await Http.post("/dashboard/questions/" + questionId + "/answers/" + answerId + "/vote-up");
-    }
-
-    static async voteAnswerDown(questionId, answerId) {
-        return await Http.post("/dashboard/questions/" + questionId + "/answers/" + answerId + "/vote-down");
-    }
 }
   
 export default QuestionService;

@@ -3,9 +3,9 @@ import {Redirect, Route} from 'react-router-dom';
 
 // Components
 import Profile from './../screens/profile';
-import Home from 'components/Home';
-import { QuestionPage } from 'components/Question';
-import MyQuestions from 'components/Question/components/MyQuestions';
+import Home from './../components/Home';
+import MyQuestions from './../components/Question/components/MyQuestions';
+import QuestionPage from './../components/Question/components/QuestionPage';
 
 // Constants
 export const ROUTES = [

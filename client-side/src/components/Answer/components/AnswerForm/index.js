@@ -5,6 +5,7 @@ import InputBox from './../../../Input/InputBox';
 import answerSchema from "./answerSchema";
 
 import './style.scss';
+import Alert from './../../../Alert/index';
 
 const AnswerForm = ({onSubmit}) => {
   return (
@@ -15,11 +16,17 @@ const AnswerForm = ({onSubmit}) => {
       enableReinitialize
       initialValues={{
         content: '',
-        hasError: false
+        hasError: false,
+        errorMessage: ''
       }}
       render={props => {
         return (
           <Form className="answer-form">
+            {props.values.hasError &&
+              <Alert type={"danger"}>
+                Something went wrong. Please try again.
+              </Alert>
+            }
             <InputBox
               id="content"
               name="content"

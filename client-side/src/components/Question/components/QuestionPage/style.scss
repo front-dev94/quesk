@@ -174,4 +174,16 @@
         justify-content: space-between;
         -webkit-justify-content: space-between;
     }
+
+    .actions{
+        .action-btn{
+            border: none;
+            background: #ecf0f1;
+            outline: none;
+            border-radius: 50%;
+            height: 40px;
+            width: 40px;
+            margin-left: 10px;
+        }
+    }
 }

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import QuestionService from '../../services/QuestionService';
+import AnswerService from '../../services/AnswerService';
 import AnswerForm from './components/AnswerForm';
 import './style.scss';
 
@@ -8,7 +8,7 @@ const Answer = (props) => {
         const {content} = values;
         const {question} = props;
 
-        const answer = await QuestionService.answerOnQuestion(question._id, { content });
+        const answer = await AnswerService.answerOnQuestion(question._id, { content });
         setFieldValue("hasError", false);
 
         if (!answer.error) {

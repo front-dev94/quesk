@@ -5,13 +5,19 @@ class AuthService {
   static async login(data) {
     const response = await Http.post('/auth/login', data);
 
-    return userInfoFormatter(response.data);
+    if(response.data)
+      return userInfoFormatter(response.data);
+    
+    return response;
   }
 
   static async signUp(data) {
     const response = await Http.post('/auth/sign-up', data);
 
-    return userInfoFormatter(response.data);
+    if(response.data)
+      return userInfoFormatter(response.data);
+    
+    return response;
   }
 }
 

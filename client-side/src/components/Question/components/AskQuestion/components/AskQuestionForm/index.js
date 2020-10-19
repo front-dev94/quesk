@@ -1,4 +1,4 @@
-import React, {useRef, useEffect} from 'react';
+import React from 'react';
 import {Form, Formik} from "formik";
 
 import InputBox from '../../../../../Input/InputBox';
@@ -17,7 +17,8 @@ const AskQuestionForm = ({forwardedRef, onApplyTag}) => {
       enableReinitialize
       initialValues={{
         title: '',
-        content: ''
+        content: '',
+        hasError: false
       }}
       render={props => {
         return (

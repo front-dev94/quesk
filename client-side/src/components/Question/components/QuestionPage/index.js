@@ -14,6 +14,7 @@ import moment from 'moment';
 
 // Services
 import QuestionService from './../../../../services/QuestionService';
+import AnswerService from '../../../../services/AnswerService';
 
 import './style.scss';
 
@@ -80,22 +81,23 @@ const QuestionPage = (props) => {
 
     const handleAnswerVoteUp = async (e, answerId) => {
         e.preventDefault();
-        const response = await QuestionService.voteAnswerUp(question._id, answerId);
+        const response = await AnswerService.voteAnswerUp(question._id, answerId);
 
         if(!response.error){
             const answerIndex = answers.findIndex(item => item._id === answerId);
-        
+            
             let currentAnswers = answers;
 
             currentAnswers[answerIndex].upVotes = currentAnswers[answerIndex].upVotes + 1;
 
             setAnswers(currentAnswers);
+            getData();
         }
     }
 
     const handleAnswerVoteDown = async (e, answerId) => {
         e.preventDefault();
-        const response = await QuestionService.voteAnswerDown(question._id, answerId);
+        const response = await AnswerService.voteAnswerDown(question._id, answerId);
 
         if(!response.error){
             const answerIndex = answers.findIndex(item => item._id === answerId);
@@ -105,6 +107,25 @@ const QuestionPage = (props) => {
             currentAnswers[answerIndex].downVotes = currentAnswers[answerIndex].downVotes + 1;
 
             setAnswers(currentAnswers);
+            getData();
+        }
+    }
+
+    const handleRemoveQuestion = async (e, questionId) => {
+        e.preventDefault();
+        const response = await QuestionService.removeQuestion(questionId);
+
+        if(response.error.deleted){
+            props.history.push('/');
+        }
+    }
+
+    const handleRemoveAnswer = async (e, answerId) => {
+        e.preventDefault();
+        const response = await AnswerService.removeAnswer(question._id, answerId);
+
+        if(response.error.deleted){
+            getData();
         }
     }
 
@@ -142,7 +163,10 @@ const QuestionPage = (props) => {
                     <PanelCard md={12} lg={12} sm={12} title={renderQuestionHeader()}>
                         <div className="question-content">
                             <p>{question.content}</p>
-                        </div> 
+                        </div>
+                        {user.username === (question.author && question.author.username) && <div className="actions">
+                            <button className="action-btn" onClick={(e) => handleRemoveQuestion(e, question._id)}><i className="fe fe-trash"></i></button>
+                        </div>}
                     </PanelCard>
                 </Row>
             </div>
@@ -171,11 +195,15 @@ const QuestionPage = (props) => {
                                                 </button>
                                             </div>
                                             <div className="question-reaction">
-                                                <span>{item.downVotes}</span>
                                                 <button className="thumbs-down"  onClick={(e) => handleAnswerVoteDown(e, item._id)}>
                                                     <i className="fe fe-thumbs-down"></i>
                                                 </button>
                                             </div>
+                                            {user.username === item.author.username &&<div className="question-reaction">
+                                                <button className="thumbs-down"  onClick={(e) => handleRemoveAnswer(e, item._id)}>
+                                                    <i className="fe fe-trash"></i>
+                                                </button>
+                                            </div>}
                                         </div>
                                     </div>
                                     <div className="answer-content">

@@ -1,4 +1,4 @@
-import React, {Suspense, useEffect, useState } from 'react';
+import React, {Suspense, useEffect, useState} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import {Router} from "react-router";
@@ -15,7 +15,7 @@ import SignUp from './screens/anonymous/sign-up';
 
 import './App.scss';
 
-const App = (props) => {
+const App = () => {
   const user = useSelector(state => state.user);
   const [isReady, setIsReady] = useState(false);
 
@@ -33,6 +33,7 @@ const App = (props) => {
 
   const logout = () => {
     setUser(null);
+    history.push("/");
   }
 
   const renderRoutes = () => {
@@ -40,6 +41,7 @@ const App = (props) => {
       return (
         <Route
           exact
+          history={history}
           user={user}
           key={idx}
           path={route.path}
