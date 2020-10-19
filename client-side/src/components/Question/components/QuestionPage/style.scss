@@ -154,6 +154,15 @@
     .question-description{
         position: relative;
         margin-bottom: 30px;
+
+        .actions{
+            display: flex;
+            display: -webkit-flex;
+
+            button{
+                margin-left: auto;
+            }
+        }
     }
 
     .write-answer-message{

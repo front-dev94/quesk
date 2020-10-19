@@ -75,7 +75,7 @@
 
     .question-info{
         position: relative;
-        min-height: 280px;
+        min-height: 220px;
         padding: 1.75rem;
 
         .question-header{
@@ -113,6 +113,10 @@
         .tags{
             display: flex;
             display: -webkit-flex;
+
+            p {
+                margin-right: 10px
+            }
 
             .tag{
                 display: flex;
