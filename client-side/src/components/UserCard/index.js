@@ -3,7 +3,7 @@ import { Col } from 'reactstrap';
 
 import './style.scss';
 
-const UserCard = ({user, isTopPerformer, history}) => {
+const UserCard = ({user, isTopPerformer}) => {
   return (
     <Fragment>
         {user && <Col sm={12} md={4} lg={4}>

@@ -1,17 +1,21 @@
 import React from 'react';
 import {Form, Formik} from "formik";
 import {Button} from "reactstrap";
-import InputBox from "components/InputBox";
-import changePasswordSchema from "./changePasswordSchema";
+import InputBox from '../../../../../../components/Input/InputBox';
+import changeUserInfoSchema from "./changeUserInfoSchema";
 import './style.scss';
 
-const ChangePasswordForm = ({onSubmit}) => {
+const ChangeUserInfoForm = ({onSubmit, user}) => {
   return (
     <Formik
       onSubmit={onSubmit}
       isInitialValid={true}
-      validationSchema={changePasswordSchema}
+      validationSchema={changeUserInfoSchema}
       initialValues={{
+        username: user.username || '',
+        firstName: user.firstName || '',
+        lastName: user.lastName || '',
+        email: user.email || '',
         oldPassword: '',
         password: '',
         confirmPassword: "",
@@ -23,6 +27,38 @@ const ChangePasswordForm = ({onSubmit}) => {
             {props.values.hasError &&
               <div className="text-danger fs-13 pb-3">{props.values.hasError}</div>
             }
+            <div className="d-flex">
+              <InputBox
+                id="firstName"
+                name="firstName"
+                type="text"
+                label="First name"
+                {...props}
+              />
+              <InputBox
+                id="lastName"
+                name="lastName"
+                type="text"
+                label="Last name"
+                {...props}
+              />
+            </div>
+            <div className="d-flex">
+              <InputBox
+                id="username"
+                name="username"
+                type="text"
+                label="Username"
+                {...props}
+              />
+              <InputBox
+                id="email"
+                name="email"
+                type="email"
+                label="Email"
+                {...props}
+              />
+            </div>
             <InputBox
               id="oldPassword"
               name="oldPassword"
@@ -59,4 +95,4 @@ const ChangePasswordForm = ({onSubmit}) => {
   );
 };
 
-export default ChangePasswordForm;
+export default ChangeUserInfoForm;

@@ -1,7 +1,7 @@
 import React from 'react';
 import {Form, Formik} from "formik";
 import { Button } from 'reactstrap';
-import Textarea from "components/Textarea";
+import InputBox from './../../../Input/InputBox';
 import answerSchema from "./answerSchema";
 
 import './style.scss';
@@ -20,10 +20,11 @@ const AnswerForm = ({onSubmit}) => {
       render={props => {
         return (
           <Form className="answer-form">
-            <Textarea
+            <InputBox
               id="content"
               name="content"
               label="Leave a answer"
+              component="textarea"
               {...props}
             />
             <div className="submit-answer">

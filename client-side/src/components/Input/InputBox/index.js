@@ -1,14 +1,16 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classnames from 'classnames';
-import { getIn } from "formik";
+import { Field, getIn } from "formik";
 import './style.scss';
 
-const Textarea = ({
+const InputBox = ({
   id,
   label,
+  type,
   name,
   placeholder,
+  component,
   size,
   touched,
   errors,
@@ -30,10 +32,12 @@ const Textarea = ({
   return (
     <div className={classnames("input-form-group", wrapperClassName)}>
       {label && <label htmlFor={id}>{label}</label>}
-      <textarea
+      <Field
         id={id}
+        type={type}
         name={name}
         placeholder={placeholder}
+        component={component}
         className={classnames("form-control", className, size, hasError ? 'is-invalid' : '')}
         onBlur={handleBlur}
         onChange={handleChange}
@@ -48,7 +52,7 @@ const Textarea = ({
   );
 };
 
-Textarea.propTypes = {
+InputBox.propTypes = {
   id: PropTypes.string.isRequired,
   className: PropTypes.string,
   children: PropTypes.node,
@@ -62,6 +66,7 @@ Textarea.propTypes = {
   placeholder: PropTypes.string,
   size: PropTypes.string,
   touched: PropTypes.shape(),
+  type: PropTypes.string,
   wrapperClassName: PropTypes.string,
   showError: PropTypes.bool,
   minLength: PropTypes.string,
@@ -69,7 +74,8 @@ Textarea.propTypes = {
   submitCount: PropTypes.number
 };
 
-Textarea.defaultProps = {
+InputBox.defaultProps = {
+  type: 'text',
   className: '',
   children: null,
   component: undefined,
@@ -86,4 +92,4 @@ Textarea.defaultProps = {
   submitCount: 0
 };
 
-export default Textarea;
+export default InputBox;

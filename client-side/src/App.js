@@ -1,5 +1,5 @@
 import React, {Suspense, useEffect, useState } from 'react';
-import { connect, useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import {Router} from "react-router";
 import {Route, Switch} from 'react-router-dom';
@@ -19,16 +19,20 @@ const App = (props) => {
   const user = useSelector(state => state.user);
   const [isReady, setIsReady] = useState(false);
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
     const user = AuthHelper.getUser();
     if (user){
-      props.setUser(user)
+      setUser(user);
     }
     setIsReady(true);
   }, []);
 
+  const setUser = (user) => dispatch(UserActions.setUser(user));
+
   const logout = () => {
-    props.setUser(null)
+    setUser(null);
   }
 
   const renderRoutes = () => {
@@ -66,12 +70,4 @@ const App = (props) => {
     )
 }
 
-const mapStateToProps = state => ({
-  user: state.user
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  setUser: (user) => dispatch(UserActions.setUser(user))
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;

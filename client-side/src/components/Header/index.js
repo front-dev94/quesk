@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Collapse, Navbar, Nav, NavbarBrand, UncontrolledDropdown, DropdownMenu, DropdownToggle, DropdownItem, Container, Button, NavItem } from 'reactstrap';
-import { getUserInitials } from 'utils/helpers/userInitials';
 import AskQuestion from 'components/Question/components/AskQuestion';
+import { getUserInitials } from 'utils/helpers/userInitials';
 
 import './style.scss';
 

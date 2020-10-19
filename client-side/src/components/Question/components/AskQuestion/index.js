@@ -1,74 +1,69 @@
-import React, {Component} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {Button, Modal, ModalBody, ModalHeader, ModalFooter} from 'reactstrap';
-import {QuestionService} from 'services';
 import AskQuestionForm from './components/AskQuestionForm';
+import QuestionService from './../../../../services/QuestionService';
 
 import './style.scss';
 
-class AskQuestion extends Component {
-  constructor(props) {
-    super(props);
+const AskQuestion = (props) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [tags, setTags] = useState([]);
+  const form = useRef(null);
 
-    this.state = {
-      isOpen: false
-    };
-
-    this.form = React.createRef();
-  }
-
-  toggleModal = () => {
-    this.setState({
-      isOpen: !this.state.isOpen
-    })
-  };
-
-  getForm = (form) => (this.form = form);
-
-  isFormValid = async (values) => {
-    const errors = await this.form.runValidationSchema(values);
+  const toggleModal = () => setIsOpen(!isOpen);
+  
+  const isFormValid = async (form, values) => {
+    const errors = await form.validateForm(values);
     return Object.keys(errors).length === 0;
   };
 
-  save = async () => {
-    this.form.handleSubmit();
-    const {values} = this.form;
-    if (this.form.isValid) {
+  const save = async () => {
+    form.current.handleSubmit();
 
+    const {values} = form.current;
+
+    const isValid = await isFormValid(form.current, values)
+    if (isValid) {
       const question = {
         title: values.title,
-        content: values.content
+        content: values.content,
+        tags
       };
 
       const response = await QuestionService.createQuestion(question);
 
       if(!response.error){
-        this.form.resetForm();
+        form.current.resetForm();
+        close();
       }
     }
   };
 
-  close = () => this.setState({isOpen: false});
+  const close = () => {
+    setIsOpen(false);
+    setTags([]);
+  };
 
-
-  render() {
-    const {isOpen} = this.state;
-    return (
-      <div>
-        <Button className="ask-question-btn" onClick={() => this.toggleModal()}>Ask question</Button>
-        <Modal contentClassName="ask-question-modal" isOpen={isOpen} centered>
-          <ModalHeader toggle={this.close}>
-            Ask question
-          </ModalHeader>
-          <ModalBody>
-            <AskQuestionForm getForm={this.getForm} onSubmit={this.handleSubmit} />
-          </ModalBody>
-          <ModalFooter>
-            <Button color="primary" outline onClick={this.save}>Save</Button>
-          </ModalFooter>
-        </Modal>
-      </div>
-    );
+  const handleApplyTag = (tags) => {
+    setTags(tags);
   }
+
+  return (
+    <div>
+      <Button className="ask-question-btn" onClick={() => toggleModal()}>Ask question</Button>
+      <Modal contentClassName="ask-question-modal" isOpen={isOpen} centered>
+        <ModalHeader toggle={close}>
+          Ask question
+        </ModalHeader>
+        <ModalBody>
+          <AskQuestionForm forwardedRef={form} onApplyTag={handleApplyTag} />
+        </ModalBody>
+        <ModalFooter>
+          <Button color="primary" outline onClick={() => save()}>Save</Button>
+        </ModalFooter>
+      </Modal>
+    </div>
+  );
 }
 
 export default AskQuestion;

@@ -40,7 +40,7 @@ const Home = () => {
    const getData = async (page = tabData.page, size = tabData.size) => {
     switch (activeTab) {
       case TAB.RECENT_QUESTIONS:
-        await getQuestions(page, size, {createdAt: 1})        
+        await getQuestions(page, size, {createdAt: -1})        
         break;
       case TAB.TOP_USERS:
           await getTopNUsers(page, size, {answerScore: -1});        
@@ -86,17 +86,21 @@ const Home = () => {
   }
 
   const handleLoadMore = async () => {
-    // let query = {page: tabData.page + 1, size: tabData.size, ...sortBy};
+    let sortBy = (activeTab === TAB.RECENT_QUESTIONS) ? {createdAt: -1} 
+      : (activeTab === TAB.RECENT_QUESTIONS) ? {answerScore: -1} 
+      : {voteScore: -1};
 
-    // const response = (activeTab === TAB.RECENT_QUESTIONS || activeTab === TAB.MOST_LIKED_QUESTIONS) ? 
-    //   await QuestionService.getAllQuestions(queryString(query)) : await UserService.getTopNUsers(queryString(query));
+    let query = {page: tabData.page + 1, size: tabData.size, ...sortBy};
 
-    // if(!response.error && response.data){
-    //   setTabData({
-    //     ...response.data,
-    //     payload: tabData.payload.concat(response.data.payload)
-    //   })
-    // }
+    const response = (activeTab === TAB.RECENT_QUESTIONS || activeTab === TAB.MOST_LIKED_QUESTIONS) ? 
+      await QuestionService.getAllQuestions(queryString(query)) : await UserService.getTopNUsers(queryString(query));
+
+    if(!response.error && response.data){
+      setTabData({
+        ...response.data,
+        payload: tabData.payload.concat(response.data.payload)
+      })
+    }
   }
 
   const renderTabData = () => {
@@ -112,7 +116,6 @@ const Home = () => {
       )
     }
   }
-
   
   return (
     <PageContent title={PAGE_TITLE}>
@@ -122,7 +125,8 @@ const Home = () => {
             console.log(activeTab)
             return (
               <button
-                key={idx} 
+                key={idx}
+                disabled={activeTab === item.value}
                 className={classnames("tab-item", activeTab === item.value ? "active" : "")} 
                 onClick={() => { toggleTab(item.value) }}>
                   {item.name}
@@ -132,6 +136,9 @@ const Home = () => {
         </div>
       </div>
       {renderTabData()}
+      {tabData.payload.length < tabData.count && <div className="load-more">
+        <button onClick={() => handleLoadMore()}>Load more</button>
+      </div>}
     </PageContent>
   );
 };

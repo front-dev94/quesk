@@ -2,7 +2,8 @@ import React from 'react';
 import {Link} from "react-router-dom";
 import {Form, Formik} from "formik";
 import {Button} from "reactstrap";
-import InputBox, {PasswordBox} from "components/InputBox";
+import InputBox from '../../../../../components/Input/InputBox';
+import PasswordBox from '../../../../../components/Input/PasswordBox';
 import loginSchema from "./loginSchema";
 
 const LoginForm = ({onSubmit}) => {

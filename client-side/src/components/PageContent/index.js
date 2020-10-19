@@ -4,7 +4,7 @@ import './style.scss';
 
 const PageContent = ({className, title, children}) => {
   return (
-    <div className="page-layout">
+    <div className={classnames("page-layout", className)}>
       <div className="page-top-bg"></div>
       <div className="page-content">
         <div className="container">

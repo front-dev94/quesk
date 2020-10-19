@@ -2,7 +2,7 @@ import React from 'react';
 import {Redirect, Route} from 'react-router-dom';
 
 // Components
-import Profile from './../screens/profile/Profile';
+import Profile from './../screens/profile';
 import Home from 'components/Home';
 import { QuestionPage } from 'components/Question';
 import MyQuestions from 'components/Question/components/MyQuestions';

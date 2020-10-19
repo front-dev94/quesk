@@ -1,46 +1,30 @@
-import React, {Component} from 'react';
+import React, {useState} from 'react';
 import QuestionService from '../../services/QuestionService';
 import AnswerForm from './components/AnswerForm';
 import './style.scss';
 
-class Answer extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            isReady: false,
-        }
-
-        this.handleOnSubmit = this.handleOnSubmit.bind(this);
-    }
-
-    handleOnSubmit = async (values, {resetForm, validateForm, setFieldValue}) => {
+const Answer = (props) => {
+    const handleOnSubmit = async (values, {resetForm, validateForm, setFieldValue}) => {
         const {content} = values;
-        const {question} = this.props;
+        const {question} = props;
 
-        const data = {
-            content: content
-        };
-
-        const answer = await QuestionService.answerOnQuestion(question._id, data);
+        const answer = await QuestionService.answerOnQuestion(question._id, { content });
         setFieldValue("hasError", false);
 
         if (!answer.error) {
-            resetForm({ content: '', hasError: false});
-            await this.props.getData();
+            resetForm();
+            await props.getData();
         } else {
             setFieldValue("hasError", true);
             validateForm({});
         }
     };
 
-    render() {
-        return (
-            <div className="answer-on-question-container">
-                <AnswerForm onSubmit={this.handleOnSubmit}/>
-            </div>
-        );
-    }
+    return (
+        <div className="answer-on-question-container">
+            <AnswerForm onSubmit={handleOnSubmit} />
+        </div>
+    );
 }
 
 export default Answer;

@@ -12,6 +12,10 @@ class UserService {
   static async getUser(id) {
     return await Http.get("/dashboard/users/" + id);
   }
+
+  static async updateUser(id, data){
+    return await Http.put("/dashboard/users/" + id, data);
+  }
 }
   
 export default UserService;
